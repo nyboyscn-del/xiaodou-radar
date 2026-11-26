@@ -83,8 +83,12 @@
     <a class="followbtn" href="https://x.com/intent/follow?screen_name=nyboys4" target="_blank" rel="noopener" onclick="statHit('follow-click')">关注 @nyboys4</a>
   </div>
 
+  <div class="followbar" id="wxbar" style="display:none;">
+    <span>微信里领码更快：关注公众号<b>「破局笔记」</b>，回复<b>「小豆」</b>直接发你一条最新码 👉</span>
+  </div>
+
   <div class="reportbar">
-    <b class="t">📣 我有多余的码</b> —— 你的码被人用上，你得 <b>1,200 额度积分</b>（小豆官方邀请活动）。填入你的码，点按钮去 X 发帖，巡检约 15 分钟内自动收录到下面列表：<br>
+    <b class="t">📣 我有多余的码</b> —— 你的码被人用上，你得 <b>1,200 额度积分</b>（小豆官方邀请活动）。<span id="reportNote">填入你的码，点按钮去 X 发帖，巡检约 15 分钟内自动收录到下面列表：</span><br>
     <span style="display:inline-block;margin-top:8px;">
       <input id="reportCode" maxlength="6" placeholder="填入你的码" autocomplete="off">
       <a class="xbtn" id="reportPost" href="#" target="_blank" rel="noopener">去 X 发帖报码</a>
@@ -266,9 +270,19 @@ soundBtn.onclick = () => {
 };
 paintSoundBtn();
 
+/* 国内版（?v=cn 或部署注入 FORCE_CN）：隐藏 X 关注与 X 报码，换公众号领码指引与复制文案报码 */
+const IS_CN = new URLSearchParams(location.search).get('v') === 'cn' || window.FORCE_CN === true;
+if (IS_CN) {
+  document.querySelector('.followbar').style.display = 'none';
+  document.getElementById('wxbar').style.display = 'flex';
+  document.getElementById('reportPost').style.display = 'none';
+  document.getElementById('reportNote').textContent = '填入你的码，点「复制文案」去微博 / 小红书发帖，巡检约 15 分钟内自动收录到下面列表：';
+}
+
+const RADAR_URL = window.CN_SITE_URL || 'https://nyboyscn-del.github.io/xiaodou-radar/';
 function reportText() {
   const c = (document.getElementById('reportCode').value || 'XXXXXX').toUpperCase().trim();
-  return `送一个小豆邀请码：${c}，先到先得，用上了回我一声～\n邀请码实时汇总在豆码雷达：https://nyboyscn-del.github.io/xiaodou-radar/\n#小豆邀请码`;
+  return `送一个小豆邀请码：${c}，先到先得，用上了回我一声～\n邀请码实时汇总在豆码雷达：${RADAR_URL}\n#小豆邀请码`;
 }
 document.getElementById('reportPost').onclick = e => {
   statHit('report-click');
