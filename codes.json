@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-11-26 11:18 北京时间",
-  "lastSinceId": "2125636173850968164",
+  "lastUpdated": "2026-11-26 11:33 北京时间",
+  "lastSinceId": "2125793036814717293",
   "total": 120,
-  "available": 3,
+  "available": 2,
   "codes": [
     {
       "code": "BC5RKZ",
@@ -37,8 +37,8 @@
       "postUrl": "https://x.com/ai_bange/status/2125523830584250540",
       "postedAt": "2026-11-25 17:35:46 北京时间",
       "postedAtUtc": "2026-11-25T09:35:46.000Z",
-      "replyCount": 0,
-      "status": "maybe_available",
+      "replyCount": 1,
+      "status": "maybe_used",
       "expires": "2026-11-27 17:31",
       "platform": "X",
       "source": "good1uck"
