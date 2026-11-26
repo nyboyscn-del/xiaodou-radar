@@ -30,11 +30,20 @@ def main():
             days = int(sys.argv[sys.argv.index("--days") + 1])
         except Exception:
             pass
-    keys = ["pv-total", "uv-total", "pv-from-x", "pv-from-search", "pv-direct", "pv-from-other", "copy-total"]
+    keys = ["pv-total", "uv-total", "pv-from-x", "pv-from-search", "pv-direct", "pv-from-other", "copy-total", "follow-click"]
     out = {k: get(k) for k in keys}
     print("豆码雷达访问统计（累计，自 2026-11-26 统计上线起）")
     for k in keys:
         print(f"  {k}: {out[k]}")
+    print("来源域名分项（2026-11-26 晚加埋点，此前流量无此分项；只列 >0 的候选域名）：")
+    candidates = ["none", "x-com", "t-co", "twitter-com", "github-com", "nyboyscn-del-github-io",
+                  "linux-do", "v2ex-com", "weibo-com", "google-com", "bing-com", "baidu-com",
+                  "duckduckgo-com", "threads-com", "facebook-com", "instagram-com", "zhihu-com",
+                  "xiaohongshu-com", "bilibili-com", "youtube-com", "chatgpt-com"]
+    for h in candidates:
+        v = get("pv-ref-" + h)
+        if v:
+            print(f"  pv-ref-{h}: {v}")
     print(f"最近 {days} 天（北京时间）：")
     today = datetime.now(BJ).date()
     for i in range(days):
