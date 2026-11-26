@@ -30,7 +30,7 @@ def main():
             days = int(sys.argv[sys.argv.index("--days") + 1])
         except Exception:
             pass
-    keys = ["pv-total", "uv-total", "pv-from-x", "pv-from-search", "pv-direct", "pv-from-other", "copy-total", "follow-click"]
+    keys = ["pv-total", "uv-total", "pv-from-x", "pv-from-search", "pv-direct", "pv-from-other", "copy-total", "follow-click", "report-click", "report-copy", "sound-enable", "sound-alert"]
     out = {k: get(k) for k in keys}
     print("豆码雷达访问统计（累计，自 2026-11-26 统计上线起）")
     for k in keys:
