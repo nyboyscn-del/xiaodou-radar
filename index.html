@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>豆码雷达 · 小豆邀请码实时抓码（社区收集）</title>
+<meta name="description" content="社区收集的豆包小豆邀请码，来自 X 等平台的公开分享帖，多源聚合、每几分钟巡检更新。一码只能用一次，请尽快尝试。非官方站点。">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #1c2333; line-height: 1.6; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 48px; }
+  header { text-align: center; padding: 28px 0 8px; }
+  header h1 { font-size: 28px; }
+  header h1 .bean { color: #e8590c; }
+  header p.sub { color: #5b6474; margin-top: 6px; font-size: 14px; }
+  .stats { display: flex; gap: 10px; justify-content: center; margin: 18px 0 6px; flex-wrap: wrap; }
+  .stat { background: #fff; border: 1px solid #e6e8ee; border-radius: 12px; padding: 10px 18px; text-align: center; min-width: 104px; }
+  .stat b { display: block; font-size: 22px; color: #e8590c; }
+  .stat span { font-size: 12px; color: #5b6474; }
+  .notice { background: #fff7ed; border: 1px solid #ffd8a8; border-radius: 12px; padding: 12px 16px; font-size: 13px; margin: 14px 0; }
+  .hero { background: #fff; border: 2px solid #e8590c; border-radius: 16px; padding: 18px; text-align: center; margin: 14px 0; }
+  .hero .label { font-size: 13px; color: #5b6474; }
+  .hero .code { font-size: 40px; font-weight: 800; letter-spacing: 4px; color: #e8590c; margin: 6px 0; font-family: ui-monospace, Menlo, monospace; }
+  .hero .meta { font-size: 12px; color: #5b6474; }
+  button.copy { background: #e8590c; color: #fff; border: 0; border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer; margin-top: 10px; }
+  button.copy:active { opacity: .8; }
+  .filters { display: flex; gap: 8px; margin: 18px 0 10px; }
+  .filters button { border: 1px solid #d5d9e2; background: #fff; border-radius: 999px; padding: 5px 16px; cursor: pointer; font-size: 13px; }
+  .filters button.on { background: #1c2333; color: #fff; border-color: #1c2333; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e6e8ee; }
+  th, td { padding: 10px 8px; font-size: 13px; text-align: left; border-bottom: 1px solid #eef0f4; vertical-align: middle; }
+  th { background: #fafbfc; color: #5b6474; font-weight: 600; }
+  td.code { font-family: ui-monospace, Menlo, monospace; font-weight: 700; font-size: 16px; letter-spacing: 1px; }
+  .badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: 11px; }
+  .b-ok { background: #e6fcf5; color: #087f5b; }
+  .b-used { background: #f1f3f5; color: #868e96; }
+  .mini { border: 1px solid #d5d9e2; background: #fff; border-radius: 6px; padding: 2px 10px; cursor: pointer; font-size: 12px; }
+  tr.tried td { opacity: .45; }
+  a { color: #1971c2; text-decoration: none; }
+  section.box { background: #fff; border: 1px solid #e6e8ee; border-radius: 12px; padding: 16px 18px; margin-top: 16px; font-size: 14px; }
+  section.box h2 { font-size: 16px; margin-bottom: 8px; }
+  section.box ol { padding-left: 20px; }
+  footer { text-align: center; color: #868e96; font-size: 12px; margin-top: 28px; }
+  .refresh { font-size: 12px; color: #868e96; text-align: center; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🫘 豆码<span class="bean">雷达</span></h1>
+    <p class="sub">小豆邀请码实时抓码 · 多源聚合（X / 微博 / LINUX DO 等公开分享）</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><b id="stTotal">—</b><span>当前收录</span></div>
+    <div class="stat"><b id="stAvail">—</b><span>可能可用</span></div>
+    <div class="stat"><b id="stUpdate" style="font-size:14px;line-height:29px;">—</b><span>最后巡检</span></div>
+  </div>
+  <p class="refresh">数据每几分钟巡检写入一次，本页每 30 秒自动刷新 · 状态按原帖回复数推断，不保证可用</p>
+
+  <div class="hero" id="hero" style="display:none;">
+    <div class="label">最新一个可能可用的码 · 先试这个 👇</div>
+    <div class="code" id="heroCode">------</div>
+    <div class="meta" id="heroMeta"></div>
+    <button class="copy" id="heroCopy">复制邀请码</button>
+  </div>
+
+  <div class="notice"><b>⚠️ 别付钱买码。</b>闲鱼等平台已有人反映买码被骗，还有卖家要求先付押金、激活后把新生成的码返还再转卖的套路。本站的码全部来自公开分享，免费。</div>
+
+  <div class="filters">
+    <button id="fAll" class="on">全部</button>
+    <button id="fAvail">只看可能可用</button>
+  </div>
+  <table>
+    <thead><tr><th>邀请码</th><th>来源</th><th>发帖时间</th><th>状态</th><th></th></tr></thead>
+    <tbody id="rows"><tr><td colspan="5">正在载入…</td></tr></tbody>
+  </table>
+  <p style="font-size:12px;color:#868e96;margin-top:8px;">一码只能用一次。复制后请尽快在小豆 App 里使用；不能用就在该行点「试过了」，标记只保存在你这台设备上，下次刷新自动靠后。</p>
+
+  <section class="box">
+    <h2>不用邀请码的路径</h2>
+    <ol>
+      <li>有人反馈豆包老号有机会免排队：打开<b>豆包 App</b>，用已有老账号登录；</li>
+      <li>点头像进设置，找「邀请好友体验小豆」入口；</li>
+      <li>入口还在的话可直接邀请体验，无需另外找码。</li>
+    </ol>
+  </section>
+
+  <section class="box">
+    <h2>邀请码怎么用</h2>
+    <ol>
+      <li>应用商店搜「小豆」下载（认准：豆包旗下 AI 个人助理）；</li>
+      <li>登录后停在「你已加入等候名单」页，点「我有邀请码，马上去体验」；</li>
+      <li>在 6 格输入页填码，验证通过即进入。</li>
+    </ol>
+  </section>
+
+  <footer>
+    社区收集，非官方 · 与豆包、字节跳动无关 · 邀请码来自公开帖子，状态为推断、结果以小豆 App 为准<br>
+    豆码雷达 by <a href="https://x.com/nyboys4" target="_blank" rel="noopener">@nyboys4</a> · AI 实践记录
+  </footer>
+</div>
+<script>
+let DATA = { codes: [] };
+let showAvailOnly = false;
+const tried = new Set(JSON.parse(localStorage.getItem('triedCodes') || '[]'));
+
+function saveTried() { localStorage.setItem('triedCodes', JSON.stringify([...tried])); }
+function copyCode(c, btn) {
+  navigator.clipboard.writeText(c).then(() => {
+    const old = btn.textContent; btn.textContent = '已复制 ✓';
+    setTimeout(() => btn.textContent = old, 1200);
+  });
+}
+function esc(s) { return String(s ?? '').replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m])); }
+
+function render() {
+  const codes = DATA.codes || [];
+  const avail = codes.filter(c => c.status === 'maybe_available' && !tried.has(c.code));
+  document.getElementById('stTotal').textContent = codes.length;
+  document.getElementById('stAvail').textContent = avail.length;
+  document.getElementById('stUpdate').textContent = (DATA.lastUpdated || '—').replace(' 北京时间','');
+
+  const hero = document.getElementById('hero');
+  if (avail.length) {
+    const top = avail[0];
+    hero.style.display = 'block';
+    document.getElementById('heroCode').textContent = top.code;
+    document.getElementById('heroMeta').textContent = `来自 ${esc(top.platform || 'X')} · @${esc(top.author || '')} · ${esc(top.postedAt || '')}${top.expires ? ' · 有效期至 ' + esc(top.expires) : ''}`;
+    document.getElementById('heroCopy').onclick = e => copyCode(top.code, e.target);
+  } else { hero.style.display = 'none'; }
+
+  let list = showAvailOnly ? codes.filter(c => c.status === 'maybe_available') : [...codes];
+  list.sort((a, b) => (tried.has(a.code) ? 1 : 0) - (tried.has(b.code) ? 1 : 0));
+  const tb = document.getElementById('rows');
+  if (!list.length) { tb.innerHTML = '<tr><td colspan="5">暂时没有符合的码，巡检还在继续，稍后再来看看。</td></tr>'; return; }
+  tb.innerHTML = list.map(c => `
+    <tr class="${tried.has(c.code) ? 'tried' : ''}">
+      <td class="code">${esc(c.code)}</td>
+      <td>${c.postUrl ? `<a href="${esc(c.postUrl)}" target="_blank" rel="noopener">@${esc(c.author || '原帖')}</a>` : '@' + esc(c.author || '')}<br><span style="color:#868e96;font-size:11px;">${esc(c.platform || 'X')}</span></td>
+      <td>${esc((c.postedAt || '').replace(' 北京时间',''))}${c.expires ? '<br><span style="color:#e8590c;font-size:11px;">至 ' + esc(c.expires) + '</span>' : ''}</td>
+      <td>${c.status === 'maybe_available' ? '<span class="badge b-ok">可能可用</span>' : '<span class="badge b-used">可能已用</span>'}</td>
+      <td><button class="mini" onclick="copyCode('${esc(c.code)}', this)">复制</button>
+          <button class="mini" onclick="markTried('${esc(c.code)}')">${tried.has(c.code) ? '已试过' : '试过了'}</button></td>
+    </tr>`).join('');
+}
+function markTried(c) { tried.has(c) ? tried.delete(c) : tried.add(c); saveTried(); render(); }
+
+async function load() {
+  try {
+    const r = await fetch('codes.json?t=' + Date.now());
+    DATA = await r.json();
+    render();
+  } catch (e) { /* keep old render */ }
+}
+document.getElementById('fAll').onclick = e => { showAvailOnly = false; e.target.classList.add('on'); document.getElementById('fAvail').classList.remove('on'); render(); };
+document.getElementById('fAvail').onclick = e => { showAvailOnly = true; e.target.classList.add('on'); document.getElementById('fAll').classList.remove('on'); render(); };
+load();
+setInterval(load, 30000);
+</script>
+</body>
+</html>
