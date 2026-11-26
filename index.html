@@ -22,6 +22,9 @@
   .hero .label { font-size: 13px; color: #5b6474; }
   .hero .code { font-size: 40px; font-weight: 800; letter-spacing: 4px; color: #e8590c; margin: 6px 0; font-family: ui-monospace, Menlo, monospace; }
   .hero .meta { font-size: 12px; color: #5b6474; }
+  .followbar { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 10px 14px; margin: 14px 0; font-size: 13px; color: #5b6474; }
+  .followbtn { background: #000; color: #fff; border: none; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }
+  .followbtn:hover { background: #333; }
   button.copy { background: #e8590c; color: #fff; border: 0; border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer; margin-top: 10px; }
   button.copy:active { opacity: .8; }
   .filters { display: flex; gap: 8px; margin: 18px 0 10px; }
@@ -63,6 +66,11 @@
     <div class="code" id="heroCode">------</div>
     <div class="meta" id="heroMeta"></div>
     <button class="copy" id="heroCopy">复制邀请码</button>
+  </div>
+
+  <div class="followbar">
+    <span>新码动态第一时间发在 X，蹲码不用反复刷本站 👉</span>
+    <a class="followbtn" href="https://x.com/intent/follow?screen_name=nyboys4" target="_blank" rel="noopener" onclick="statHit('follow-click')">关注 @nyboys4</a>
   </div>
 
   <div class="notice"><b>⚠️ 别付钱买码。</b>闲鱼等平台已有人反映买码被骗，还有卖家要求先付押金、激活后把新生成的码返还再转卖的套路。本站的码全部来自公开分享，免费。</div>
