@@ -123,6 +123,10 @@ function statHit(key) {
   else if (/google\.|baidu\.|bing\.|duckduckgo|sogou|yandex/.test(ref)) bucket = 'pv-from-search';
   else if (ref) bucket = 'pv-from-other';
   statHit(bucket);
+  // 来源域名分项（只记域名、不记完整地址）：pv-ref-<域名>，无来源记 pv-ref-none
+  let refHost = 'none';
+  try { if (ref) refHost = new URL(document.referrer).hostname.toLowerCase().replace(/[^a-z0-9]+/g, '-').slice(0, 40); } catch (e) {}
+  statHit('pv-ref-' + refHost);
   try {
     if (localStorage.getItem('uvDate') !== today) {
       localStorage.setItem('uvDate', today);
