@@ -7,7 +7,7 @@
       copy-total 复制邀请码总次数；另附最近 N 天 pv-YYYY-MM-DD / copy-YYYY-MM-DD。
 计数从 2026-11-26 上线统计起算，上线前无数据。计数接口公开可读，试验期口径，不作精确审计。
 """
-import json, sys, urllib.request
+import json, sys, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 
 BJ = timezone(timedelta(hours=8))
@@ -18,6 +18,8 @@ def get(key):
         req = urllib.request.Request(BASE + key, headers={"User-Agent": "Mozilla/5.0 xiaodou-radar-stats"})
         with urllib.request.urlopen(req, timeout=15) as r:
             return json.loads(r.read().decode("utf-8")).get("value", 0)
+    except urllib.error.HTTPError as e:
+        return 0 if e.code == 404 else None  # 404 = 该键还没被计过数
     except Exception:
         return None
 
