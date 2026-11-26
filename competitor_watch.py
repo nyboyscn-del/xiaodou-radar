@@ -30,7 +30,53 @@ SITES = [
     {"key": "betteropc", "name": "BetterOPC（UGC 获客型）",
      "page": "https://betteropc.com/ai-products/invite-codes/xiaodou",
      "codes": None, "repo": None},
+    {"key": "paipiange", "name": "拍片哥",
+     "page": "https://paipiange.github.io/xiaodou-codes/",
+     "codes": "https://raw.githubusercontent.com/paipiange/xiaodou-codes/main/codes.json",
+     "repo": "paipiange/xiaodou-codes"},
+    {"key": "guanzi", "name": "管子（CCC 站点页）",
+     "page": "https://ccccccxxxrrr.github.io/xiaodou-codes/",
+     "codes": None, "repo": None},
+    {"key": "drama", "name": "抓马小豆（ChatGPT Sites）",
+     "page": "https://drama-xiaodou.charlieva.chatgpt.site/",
+     "codes": None, "repo": None},
+    {"key": "yaoqingji", "name": "邀码集（ChatGPT Sites）",
+     "page": "https://yaoqing-ji.sociableaudio16.chatgpt.site/",
+     "codes": None, "repo": None},
+    {"key": "shidoubu", "name": "拾豆簿（Vercel）",
+     "page": "https://xiaodou-zhuamaqi.vercel.app/",
+     "codes": None, "repo": None},
+    {"key": "grokme", "name": "grok.me 码站",
+     "page": "https://xiaodou-codes.grok.me/",
+     "codes": None, "repo": None},
+    {"key": "modash", "name": "modash",
+     "page": "https://xd.modash.shop/",
+     "codes": None, "repo": None},
+    {"key": "freetokenbox", "name": "FreeTokenBox",
+     "page": "https://freetokenbox.com/xiaodou-codes",
+     "codes": None, "repo": None},
+    {"key": "douxiaozhu", "name": "豆小助",
+     "page": "https://douxiaozhu.app/",
+     "codes": None, "repo": None},
+    {"key": "jimeng", "name": "Jimeng5Xingchen（多社区聚合校验）",
+     "page": "https://jimeng5xingchen.github.io/xiaodou-codes/",
+     "codes": None, "repo": "Jimeng5Xingchen/xiaodou-codes"},
+    {"key": "tranger", "name": "tranger1234（全网搜索快照）",
+     "page": None,
+     "codes": "https://raw.githubusercontent.com/tranger1234/xiaodou-invite-codes/main/data.json",
+     "repo": "tranger1234/xiaodou-invite-codes"},
+    {"key": "keith", "name": "KEithwy1030（投票排雷，无站点页）",
+     "page": None, "codes": None,
+     "repo": "KEithwy1030/xiaodou-codes"},
+    {"key": "ziledeng", "name": "ziledeng（镜像）",
+     "page": None,
+     "codes": "https://raw.githubusercontent.com/ziledeng/xiaodou-codes/main/codes.json",
+     "repo": "ziledeng/xiaodou-codes"},
 ]
+
+KNOWN_REPOS = {"good1uck/xiaodou-codes", "Zou-git0324/xiaodou-codes", "CCCcccxxxrrr/xiaodou-codes",
+               "paipiange/xiaodou-codes", "Jimeng5Xingchen/xiaodou-codes", "tranger1234/xiaodou-invite-codes",
+               "KEithwy1030/xiaodou-codes", "ziledeng/xiaodou-codes", "nyboyscn-del/xiaodou-radar"}
 KEYWORDS = ["关注", "公众号", "微信", "粉丝群", "QQ群", "Telegram", "登录", "注册", "揭晓",
             "订阅", "推送", "提醒", "分享", "广告", "付费", "提交", "投稿", "举报",
             "收藏", "搜索", "筛选", "倒计时", "通知", "X（", "twitter", "follow"]
@@ -91,7 +137,7 @@ def main():
                     old = []
                     if os.path.exists(snap_path):
                         old = visible_text(open(snap_path, encoding="utf-8").read())
-                    added = [t for t in vt if t not in set(old)][:8]
+                    added = [t for t in vt if t not in set(old) and not re.fullmatch(r"[\d,\.·:：\s]+", t)][:8]
                     line.append("页面有更新！新增文本：" + ("；".join(added) if added else "（结构变化）"))
                     changed.append(s["key"])
                 elif not prev.get("fp"):
@@ -123,6 +169,17 @@ def main():
                 pass
         state[s["key"]] = cur
         print(" ".join(line))
+    try:
+        res = json.loads(fetch("https://api.github.com/search/repositories?q=xiaodou-codes+OR+xiaodou-invite&per_page=30"))
+        found = {r["full_name"] for r in res.get("items", [])}
+        new_repos = sorted(found - KNOWN_REPOS - set(state.get("_known_repos", [])))
+        known = sorted(KNOWN_REPOS | set(state.get("_known_repos", [])) | found)
+        state["_known_repos"] = known
+        if new_repos:
+            print("新同类仓库出现：" + "、".join(new_repos))
+            changed.append("NEW:" + ",".join(new_repos))
+    except Exception:
+        pass
     json.dump(state, open(STATE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print("变化站点：" + ("、".join(changed) if changed else "无"))
     return 0
