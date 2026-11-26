@@ -101,6 +101,36 @@
   </footer>
 </div>
 <script>
+/* 访问统计（试验期轻量计数，Abacus 免注册计数服务；只计次数，不收集个人信息）
+   指标：pv-total 打开页面总次数 / uv-total 近似独立访客（同浏览器每天计一次）
+        pv-from-x|search|direct|other 来源分布 / copy-total 复制邀请码次数
+        pv-YYYY-MM-DD、copy-YYYY-MM-DD 每日分项（日期按北京时间） */
+const STAT_NS = 'https://abacus.jasoncameron.dev/hit/xiaodou-radar-nyboys4/';
+function bjToday() {
+  try { return new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date()); }
+  catch (e) { return new Date().toISOString().slice(0, 10); }
+}
+function statHit(key) {
+  try { fetch(STAT_NS + key, { mode: 'cors', keepalive: true }).catch(() => {}); } catch (e) {}
+}
+(function trackPageview() {
+  const today = bjToday();
+  statHit('pv-total');
+  statHit('pv-' + today);
+  const ref = (document.referrer || '').toLowerCase();
+  let bucket = 'pv-direct';
+  if (/x\.com|twitter\.com|t\.co/.test(ref)) bucket = 'pv-from-x';
+  else if (/google\.|baidu\.|bing\.|duckduckgo|sogou|yandex/.test(ref)) bucket = 'pv-from-search';
+  else if (ref) bucket = 'pv-from-other';
+  statHit(bucket);
+  try {
+    if (localStorage.getItem('uvDate') !== today) {
+      localStorage.setItem('uvDate', today);
+      statHit('uv-total');
+    }
+  } catch (e) {}
+})();
+
 let DATA = { codes: [] };
 let showAvailOnly = false;
 const tried = new Set(JSON.parse(localStorage.getItem('triedCodes') || '[]'));
@@ -108,6 +138,8 @@ const tried = new Set(JSON.parse(localStorage.getItem('triedCodes') || '[]'));
 function saveTried() { localStorage.setItem('triedCodes', JSON.stringify([...tried])); }
 function copyCode(c, btn) {
   navigator.clipboard.writeText(c).then(() => {
+    statHit('copy-total');
+    statHit('copy-' + bjToday());
     const old = btn.textContent; btn.textContent = '已复制 ✓';
     setTimeout(() => btn.textContent = old, 1200);
   });
