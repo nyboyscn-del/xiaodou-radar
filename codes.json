@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-11-26 21:33 北京时间",
+  "lastUpdated": "2026-11-26 21:48 北京时间",
   "lastSinceId": "2125944410651148697",
   "total": 120,
-  "available": 4,
+  "available": 3,
   "codes": [
     {
       "code": "4WUP3P",
@@ -24,8 +24,8 @@
       "postUrl": "https://x.com/VaneAILab/status/2125938224162033874",
       "postedAt": "2026-11-26 21:02:25 北京时间",
       "postedAtUtc": "2026-11-26T13:02:25.000Z",
-      "replyCount": 0,
-      "status": "maybe_available",
+      "replyCount": 1,
+      "status": "maybe_used",
       "expires": "",
       "platform": "X",
       "source": "good1uck"
