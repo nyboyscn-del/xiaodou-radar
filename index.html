@@ -247,7 +247,7 @@ function beep() {
 
 async function load() {
   try {
-    const r = await fetch('codes.json?t=' + Date.now());
+    const r = await fetch((window.CODES_URL || 'codes.json') + '?t=' + Date.now());
     DATA = await r.json();
     const availNow = new Set((DATA.codes || []).filter(c => c.status === 'maybe_available').map(c => c.code));
     if (prevAvail && soundOn) {
