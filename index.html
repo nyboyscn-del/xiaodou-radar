@@ -27,9 +27,13 @@
   .followbtn:hover { background: #333; }
   button.copy { background: #e8590c; color: #fff; border: 0; border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer; margin-top: 10px; }
   button.copy:active { opacity: .8; }
-  .filters { display: flex; gap: 8px; margin: 18px 0 10px; }
+  button.next { background: #fff; color: #1c2333; border: 1px solid #d5d9e2; border-radius: 8px; padding: 8px 18px; font-size: 14px; cursor: pointer; margin-top: 10px; margin-left: 8px; }
+  button.next:active { opacity: .8; }
+  .filters { display: flex; gap: 8px; margin: 18px 0 10px; flex-wrap: wrap; align-items: center; }
   .filters button { border: 1px solid #d5d9e2; background: #fff; border-radius: 999px; padding: 5px 16px; cursor: pointer; font-size: 13px; }
   .filters button.on { background: #1c2333; color: #fff; border-color: #1c2333; }
+  .filters select { border: 1px solid #d5d9e2; background: #fff; border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer; }
+  .filters .spacer { flex: 1; }
   table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; border: 1px solid #e6e8ee; }
   th, td { padding: 10px 8px; font-size: 13px; text-align: left; border-bottom: 1px solid #eef0f4; vertical-align: middle; }
   th { background: #fafbfc; color: #5b6474; font-weight: 600; }
@@ -66,6 +70,7 @@
     <div class="code" id="heroCode">------</div>
     <div class="meta" id="heroMeta"></div>
     <button class="copy" id="heroCopy">复制邀请码</button>
+    <button class="next" id="heroNext">试过了 → 换下一个</button>
   </div>
 
   <div class="followbar">
@@ -78,6 +83,9 @@
   <div class="filters">
     <button id="fAll" class="on">全部</button>
     <button id="fAvail">只看可能可用</button>
+    <select id="fPlatform"><option value="">全部平台</option></select>
+    <span class="spacer"></span>
+    <button id="soundToggle">🔔 有新可用码时响一声</button>
   </div>
   <table>
     <thead><tr><th>邀请码</th><th>来源</th><th>发帖时间</th><th>状态</th><th></th></tr></thead>
@@ -145,6 +153,10 @@ function statHit(key) {
 
 let DATA = { codes: [] };
 let showAvailOnly = false;
+let platformFilter = '';
+let prevAvail = null;
+let soundOn = localStorage.getItem('soundOn') === '1';
+let audioCtx = null;
 const tried = new Set(JSON.parse(localStorage.getItem('triedCodes') || '[]'));
 
 function saveTried() { localStorage.setItem('triedCodes', JSON.stringify([...tried])); }
@@ -172,9 +184,19 @@ function render() {
     document.getElementById('heroCode').textContent = top.code;
     document.getElementById('heroMeta').textContent = `来自 ${esc(top.platform || 'X')} · @${esc(top.author || '')} · ${esc(top.postedAt || '')}${top.expires ? ' · 有效期至 ' + esc(top.expires) : ''}`;
     document.getElementById('heroCopy').onclick = e => copyCode(top.code, e.target);
+    document.getElementById('heroNext').onclick = () => markTried(top.code);
   } else { hero.style.display = 'none'; }
 
+  const sel = document.getElementById('fPlatform');
+  const platforms = [...new Set(codes.map(c => c.platform || 'X'))];
+  const selSig = platforms.join('|');
+  if (sel.dataset.sig !== selSig) {
+    sel.dataset.sig = selSig;
+    sel.innerHTML = '<option value="">全部平台</option>' + platforms.map(p => `<option value="${esc(p)}" ${p === platformFilter ? 'selected' : ''}>${esc(p)}</option>`).join('');
+  }
+
   let list = showAvailOnly ? codes.filter(c => c.status === 'maybe_available') : [...codes];
+  if (platformFilter) list = list.filter(c => (c.platform || 'X') === platformFilter);
   list.sort((a, b) => (tried.has(a.code) ? 1 : 0) - (tried.has(b.code) ? 1 : 0));
   const tb = document.getElementById('rows');
   if (!list.length) { tb.innerHTML = '<tr><td colspan="5">暂时没有符合的码，巡检还在继续，稍后再来看看。</td></tr>'; return; }
@@ -190,15 +212,45 @@ function render() {
 }
 function markTried(c) { tried.has(c) ? tried.delete(c) : tried.add(c); saveTried(); render(); }
 
+function beep() {
+  try {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    [880, 1174].forEach((f, i) => {
+      const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+      o.frequency.value = f; o.type = 'sine';
+      g.gain.setValueAtTime(0.15, audioCtx.currentTime + i * 0.18);
+      g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + i * 0.18 + 0.16);
+      o.connect(g); g.connect(audioCtx.destination);
+      o.start(audioCtx.currentTime + i * 0.18); o.stop(audioCtx.currentTime + i * 0.18 + 0.17);
+    });
+  } catch (e) {}
+}
+
 async function load() {
   try {
     const r = await fetch('codes.json?t=' + Date.now());
     DATA = await r.json();
+    const availNow = new Set((DATA.codes || []).filter(c => c.status === 'maybe_available').map(c => c.code));
+    if (prevAvail && soundOn) {
+      for (const c of availNow) { if (!prevAvail.has(c)) { beep(); statHit('sound-alert'); break; } }
+    }
+    prevAvail = availNow;
     render();
   } catch (e) { /* keep old render */ }
 }
 document.getElementById('fAll').onclick = e => { showAvailOnly = false; e.target.classList.add('on'); document.getElementById('fAvail').classList.remove('on'); render(); };
 document.getElementById('fAvail').onclick = e => { showAvailOnly = true; e.target.classList.add('on'); document.getElementById('fAll').classList.remove('on'); render(); };
+document.getElementById('fPlatform').onchange = e => { platformFilter = e.target.value; render(); };
+const soundBtn = document.getElementById('soundToggle');
+function paintSoundBtn() { soundBtn.classList.toggle('on', soundOn); soundBtn.textContent = soundOn ? '🔔 响声提醒已开' : '🔔 有新可用码时响一声'; }
+soundBtn.onclick = () => {
+  soundOn = !soundOn;
+  localStorage.setItem('soundOn', soundOn ? '1' : '0');
+  paintSoundBtn();
+  if (soundOn) { beep(); statHit('sound-enable'); }
+};
+paintSoundBtn();
 load();
 setInterval(load, 30000);
 </script>
