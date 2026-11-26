@@ -25,6 +25,11 @@
   .followbar { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; background: #fff; border: 1px solid #e7e5e4; border-radius: 12px; padding: 10px 14px; margin: 14px 0; font-size: 13px; color: #5b6474; }
   .followbtn { background: #000; color: #fff; border: none; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; }
   .followbtn:hover { background: #333; }
+  .reportbar { background: #fff7ed; border: 1px solid #ffd8a8; border-radius: 12px; padding: 12px 16px; margin: 14px 0; font-size: 13px; }
+  .reportbar b.t { color: #e8590c; }
+  .reportbar input { border: 1px solid #d5d9e2; border-radius: 8px; padding: 7px 12px; font-size: 14px; font-family: ui-monospace, Menlo, monospace; letter-spacing: 2px; width: 150px; text-transform: uppercase; }
+  .reportbar .xbtn { background: #000; color: #fff; border: none; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; margin-left: 8px; }
+  .reportbar .xbtn:hover { background: #333; }
   button.copy { background: #e8590c; color: #fff; border: 0; border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer; margin-top: 10px; }
   button.copy:active { opacity: .8; }
   button.next { background: #fff; color: #1c2333; border: 1px solid #d5d9e2; border-radius: 8px; padding: 8px 18px; font-size: 14px; cursor: pointer; margin-top: 10px; margin-left: 8px; }
@@ -76,6 +81,15 @@
   <div class="followbar">
     <span>新码动态第一时间发在 X，蹲码不用反复刷本站 👉</span>
     <a class="followbtn" href="https://x.com/intent/follow?screen_name=nyboys4" target="_blank" rel="noopener" onclick="statHit('follow-click')">关注 @nyboys4</a>
+  </div>
+
+  <div class="reportbar">
+    <b class="t">📣 我有多余的码</b> —— 你的码被人用上，你得 <b>1,200 额度积分</b>（小豆官方邀请活动）。填入你的码，点按钮去 X 发帖，巡检约 15 分钟内自动收录到下面列表：<br>
+    <span style="display:inline-block;margin-top:8px;">
+      <input id="reportCode" maxlength="6" placeholder="填入你的码" autocomplete="off">
+      <a class="xbtn" id="reportPost" href="#" target="_blank" rel="noopener">去 X 发帖报码</a>
+      <button class="mini" id="reportCopy" style="margin-left:8px;">复制文案</button>
+    </span>
   </div>
 
   <div class="notice"><b>⚠️ 别付钱买码。</b>闲鱼等平台已有人反映买码被骗，还有卖家要求先付押金、激活后把新生成的码返还再转卖的套路。本站的码全部来自公开分享，免费。</div>
@@ -251,6 +265,22 @@ soundBtn.onclick = () => {
   if (soundOn) { beep(); statHit('sound-enable'); }
 };
 paintSoundBtn();
+
+function reportText() {
+  const c = (document.getElementById('reportCode').value || 'XXXXXX').toUpperCase().trim();
+  return `送一个小豆邀请码：${c}，先到先得，用上了回我一声～\n邀请码实时汇总在豆码雷达：https://nyboyscn-del.github.io/xiaodou-radar/\n#小豆邀请码`;
+}
+document.getElementById('reportPost').onclick = e => {
+  statHit('report-click');
+  e.currentTarget.href = 'https://x.com/intent/post?text=' + encodeURIComponent(reportText());
+};
+document.getElementById('reportCopy').onclick = e => {
+  navigator.clipboard.writeText(reportText()).then(() => {
+    statHit('report-copy');
+    const b = e.target, old = b.textContent; b.textContent = '已复制 ✓';
+    setTimeout(() => b.textContent = old, 1200);
+  });
+};
 load();
 setInterval(load, 30000);
 </script>
