@@ -93,6 +93,7 @@
       <input id="reportCode" maxlength="6" placeholder="填入你的码" autocomplete="off">
       <a class="xbtn" id="reportPost" href="#" target="_blank" rel="noopener">去 X 发帖报码</a>
       <button class="mini" id="reportCopy" style="margin-left:8px;">复制文案</button>
+      <button class="xbtn" id="reportSubmit" style="display:none;margin-left:8px;">提交</button>
     </span>
   </div>
 
@@ -276,7 +277,9 @@ if (IS_CN) {
   document.querySelector('.followbar').style.display = 'none';
   document.getElementById('wxbar').style.display = 'flex';
   document.getElementById('reportPost').style.display = 'none';
-  document.getElementById('reportNote').textContent = '填入你的码，点「复制文案」去微博 / 小红书发帖，巡检约 15 分钟内自动收录到下面列表：';
+  document.getElementById('reportCopy').style.display = 'none';
+  document.getElementById('reportSubmit').style.display = '';
+  document.getElementById('reportNote').textContent = '填入你的码，点「提交」直接交到雷达池，巡检约 15 分钟内收录到下面列表：';
 }
 
 const RADAR_URL = window.CN_SITE_URL || 'https://nyboyscn-del.github.io/xiaodou-radar/';
@@ -287,6 +290,20 @@ function reportText() {
 document.getElementById('reportPost').onclick = e => {
   statHit('report-click');
   e.currentTarget.href = 'https://x.com/intent/post?text=' + encodeURIComponent(reportText());
+};
+document.getElementById('reportSubmit').onclick = async e => {
+  const inp = document.getElementById('reportCode');
+  const note = document.getElementById('reportNote');
+  const c = (inp.value || '').toUpperCase().trim();
+  if (!/^[A-Z0-9]{6}$/.test(c) || !/[A-Z]/.test(c) || !/[0-9]/.test(c)) { note.textContent = '码是 6 位字母和数字，检查一下再提交：'; inp.focus(); return; }
+  const b = e.target; b.disabled = true; b.textContent = '提交中…';
+  try {
+    const r = await fetch('https://wx.nyboys.top/api/report', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: c }) });
+    const j = await r.json();
+    if (j.ok) { statHit('report-submit'); note.textContent = '✅ 已提交，巡检收录后就会出现在下面列表里（约 15 分钟内）。有新码随时再来交。'; inp.value = ''; }
+    else note.textContent = '提交没成功：' + (j.reason || '请过会儿再试') + '。再试一次：';
+  } catch (err) { note.textContent = '提交失败，网络可能不稳，过会儿再试：'; }
+  b.disabled = false; b.textContent = '提交';
 };
 document.getElementById('reportCopy').onclick = e => {
   navigator.clipboard.writeText(reportText()).then(() => {
