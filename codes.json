@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-27 22:18 北京时间",
+  "lastUpdated": "2026-11-27 22:33 北京时间",
   "lastSinceId": "2126297597719761046",
   "total": 120,
   "available": 5,
@@ -196,19 +196,6 @@
       "replyCount": 11,
       "status": "maybe_used",
       "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "9HRUE3",
-      "postId": "2125598146088841313",
-      "author": "daiguaxiaojian",
-      "postUrl": "https://x.com/daiguaxiaojian/status/2125598146088841313",
-      "postedAt": "2026-11-25 22:31:04 北京时间",
-      "postedAtUtc": "2026-11-25T14:31:04.000Z",
-      "replyCount": 1,
-      "status": "maybe_used",
-      "expires": "2026-11-27 22:30",
       "platform": "X",
       "source": "good1uck"
     },
@@ -1553,6 +1540,19 @@
     },
     {
       "code": "D8V3WH",
+      "postId": "2125266721493889229",
+      "author": "yituihi",
+      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
+      "postedAt": "2026-11-25 00:34:06 北京时间",
+      "postedAtUtc": "2026-11-24T16:34:06.000Z",
+      "replyCount": 7,
+      "status": "maybe_used",
+      "expires": "",
+      "platform": "X",
+      "source": "good1uck"
+    },
+    {
+      "code": "J4N9PB",
       "postId": "2125266721493889229",
       "author": "yituihi",
       "postUrl": "https://x.com/yituihi/status/2125266721493889229",
