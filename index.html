@@ -30,6 +30,9 @@
   .reportbar input { border: 1px solid #d5d9e2; border-radius: 8px; padding: 7px 12px; font-size: 14px; font-family: ui-monospace, Menlo, monospace; letter-spacing: 2px; width: 150px; text-transform: uppercase; }
   .reportbar .xbtn { background: #000; color: #fff; border: none; border-radius: 999px; padding: 7px 16px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; margin-left: 8px; }
   .reportbar .xbtn:hover { background: #333; }
+  .tipbar { background: #f0f6ff; border: 1px solid #c9defc; border-radius: 12px; padding: 12px 16px; margin: 14px 0; font-size: 13px; line-height: 1.9; }
+  .tipbar b.t { color: #1c6fe0; }
+  .tipbar ul { margin: 4px 0 0; padding-left: 18px; }
   button.copy { background: #e8590c; color: #fff; border: 0; border-radius: 8px; padding: 8px 22px; font-size: 15px; cursor: pointer; margin-top: 10px; }
   button.copy:active { opacity: .8; }
   button.next { background: #fff; color: #1c2333; border: 1px solid #d5d9e2; border-radius: 8px; padding: 8px 18px; font-size: 14px; cursor: pointer; margin-top: 10px; margin-left: 8px; }
@@ -95,6 +98,16 @@
       <button class="mini" id="reportCopy" style="margin-left:8px;">复制文案</button>
       <button class="xbtn" id="reportSubmit" style="display:none;margin-left:8px;">提交</button>
     </span>
+  </div>
+
+  <div class="tipbar">
+    <b class="t">💡 额度与领码提醒</b>
+    <ul>
+      <li><b>邀请奖励</b>：好友用你的码成功加入，双方各得 <b>1,200 额度积分</b>（小豆官方邀请活动）。</li>
+      <li><b>一码一用</b>：码被用掉就作废；列表状态是按原帖回复数推断的，「可能可用」也可能刚被人抢先一步。</li>
+      <li><b>有效期</b>：部分码带有效期，列表里会标出来；过期的码巡检会自动剔除。</li>
+      <li><b>抢码提醒</b>：打开下面的「有新可用码时响一声」，新码一到就知道，不用一直刷。</li>
+    </ul>
   </div>
 
   <div class="notice"><b>⚠️ 别付钱买码。</b>闲鱼等平台已有人反映买码被骗，还有卖家要求先付押金、激活后把新生成的码返还再转卖的套路。本站的码全部来自公开分享，免费。</div>
