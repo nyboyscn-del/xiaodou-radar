@@ -1,9 +1,35 @@
 {
-  "lastUpdated": "2026-11-27 17:18 北京时间",
-  "lastSinceId": "2126189808695578629",
+  "lastUpdated": "2026-11-27 17:33 北京时间",
+  "lastSinceId": "2126243889631932539",
   "total": 120,
-  "available": 4,
+  "available": 5,
   "codes": [
+    {
+      "code": "3RGZM5",
+      "postId": "2126243841934348700",
+      "author": "runyixuan",
+      "postUrl": "https://x.com/runyixuan/status/2126243841934348700",
+      "postedAt": "2026-11-27 17:16:50 北京时间",
+      "postedAtUtc": "2026-11-27T09:16:50.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-29 17:14",
+      "platform": "X",
+      "source": "good1uck"
+    },
+    {
+      "code": "Z5U953",
+      "postId": "2126242317350944792",
+      "author": "peng_xun",
+      "postUrl": "https://x.com/peng_xun/status/2126242317350944792",
+      "postedAt": "2026-11-27 17:10:46 北京时间",
+      "postedAtUtc": "2026-11-27T09:10:46.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-29 17:01",
+      "platform": "X",
+      "source": "good1uck"
+    },
     {
       "code": "W36Z5Q",
       "postId": "2126189541375840360",
@@ -157,32 +183,6 @@
       "replyCount": 1,
       "status": "maybe_used",
       "expires": "2026-11-27 22:30",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "TNYA5J",
-      "postId": "2125523830584250540",
-      "author": "ai_bange",
-      "postUrl": "https://x.com/ai_bange/status/2125523830584250540",
-      "postedAt": "2026-11-25 17:35:46 北京时间",
-      "postedAtUtc": "2026-11-25T09:35:46.000Z",
-      "replyCount": 1,
-      "status": "maybe_used",
-      "expires": "2026-11-27 17:31",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "2YZBHL",
-      "postId": "2125523712892178879",
-      "author": "ai_bange",
-      "postUrl": "https://x.com/ai_bange/status/2125523712892178879",
-      "postedAt": "2026-11-25 17:35:18 北京时间",
-      "postedAtUtc": "2026-11-25T09:35:18.000Z",
-      "replyCount": 0,
-      "status": "maybe_available",
-      "expires": "2026-11-27 17:32",
       "platform": "X",
       "source": "good1uck"
     },
