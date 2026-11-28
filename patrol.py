@@ -12,11 +12,11 @@
   - 同码去重，保留信息更全/更新的一条；新码在前（按发帖时间倒序）
   - 已过期（expires 已过）的不收录；confirmed_used 不收录
 """
-import json, re, subprocess, sys, urllib.request
+import json, os, re, subprocess, sys, urllib.request
 from datetime import datetime, timezone, timedelta
 
 BJ = timezone(timedelta(hours=8))
-HERE = "/home/hatch/workspace/xiaodou-radar"
+HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = HERE + "/codes.json"
 DENY = {"OPENAI", "CLOUDX", "GOOGLE", "GEMINI", "CURSOR", "CLAUDE", "GROKAI",
         "PRINTF", "OUTPUT", "STRING", "RETURN", "IMPORT", "SELECT", "INSERT"}
@@ -156,6 +156,29 @@ def main():
         merged[n["code"]] = n
 
     now = datetime.now(BJ)
+    # D 站内 / 公众号直交报码（经统一码池 Worker 收集，48 小时内有效）
+    try:
+        key = open(HERE + "/.pool_key", encoding="utf-8").read().strip()
+        rep = fetch_json(f"https://wx.nyboys.top/api/reported?key={key}")
+        for x in rep.get("reported", []):
+            code = (x.get("code") or "").upper()
+            if not valid_code(code) or code in merged:
+                continue
+            try:
+                dt = datetime.fromisoformat((x.get("at") or "").replace("Z", "+00:00"))
+            except Exception:
+                continue
+            if dt.astimezone(BJ) < now - timedelta(hours=48):
+                continue
+            merged[code] = {
+                "code": code, "postId": "", "author": "网友报码", "postUrl": "",
+                "postedAt": dt.astimezone(BJ).strftime("%Y-%m-%d %H:%M:%S") + " 北京时间",
+                "postedAtUtc": dt.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.000Z"),
+                "replyCount": 0, "status": "maybe_available", "expires": "",
+                "platform": "站内报码", "source": "reported",
+            }
+    except Exception as e:
+        print(f"[patrol] reported skipped: {e}", file=sys.stderr)
     codes = []
     for n in merged.values():
         exp_dt = parse_expires(n.get("expires"))
