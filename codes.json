@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-11-28 18:48 北京时间",
-  "lastSinceId": "2126624993404694952",
+  "lastUpdated": "2026-11-28 19:03 北京时间",
+  "lastSinceId": "2126630144429465740",
   "total": 120,
-  "available": 9,
+  "available": 8,
   "codes": [
     {
       "code": "LK4AC7",
@@ -11,8 +11,8 @@
       "postUrl": "https://x.com/nblndg2/status/2126624663493386633",
       "postedAt": "2026-11-28 18:30:05 北京时间",
       "postedAtUtc": "2026-11-28T10:30:05.000Z",
-      "replyCount": 0,
-      "status": "maybe_available",
+      "replyCount": 1,
+      "status": "maybe_used",
       "expires": "2026-11-30 18:28",
       "platform": "X",
       "source": "good1uck"
