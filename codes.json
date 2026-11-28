@@ -1,9 +1,35 @@
 {
-  "lastUpdated": "2026-11-28 12:18 北京时间",
-  "lastSinceId": "2126525783275655387",
+  "lastUpdated": "2026-11-28 12:33 北京时间",
+  "lastSinceId": "2126530764506562714",
   "total": 120,
-  "available": 7,
+  "available": 8,
   "codes": [
+    {
+      "code": "HKB3W6",
+      "postId": "2126530764506562714",
+      "author": "gsti",
+      "postUrl": "https://x.com/gsti/status/2126530764506562714",
+      "postedAt": "2026-11-28 12:16:57 北京时间",
+      "postedAtUtc": "2026-11-28T04:16:57.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-30 12:08",
+      "platform": "X",
+      "source": "good1uck"
+    },
+    {
+      "code": "RPQDC3",
+      "postId": "2126529340762730846",
+      "author": "tttkkkxx",
+      "postUrl": "https://x.com/tttkkkxx/status/2126529340762730846",
+      "postedAt": "2026-11-28 12:11:18 北京时间",
+      "postedAtUtc": "2026-11-28T04:11:18.000Z",
+      "replyCount": 2,
+      "status": "maybe_used",
+      "expires": "2026-11-30 12:10",
+      "platform": "X",
+      "source": "good1uck"
+    },
     {
       "code": "2C2N8L",
       "postId": "2126523853480567106",
@@ -1527,32 +1553,6 @@
     },
     {
       "code": "V7H5ZD",
-      "postId": "2125266721493889229",
-      "author": "yituihi",
-      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
-      "postedAt": "2026-11-25 00:34:06 北京时间",
-      "postedAtUtc": "2026-11-24T16:34:06.000Z",
-      "replyCount": 7,
-      "status": "maybe_used",
-      "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "P3W8JF",
-      "postId": "2125266721493889229",
-      "author": "yituihi",
-      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
-      "postedAt": "2026-11-25 00:34:06 北京时间",
-      "postedAtUtc": "2026-11-24T16:34:06.000Z",
-      "replyCount": 7,
-      "status": "maybe_used",
-      "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "G9M4LC",
       "postId": "2125266721493889229",
       "author": "yituihi",
       "postUrl": "https://x.com/yituihi/status/2125266721493889229",
