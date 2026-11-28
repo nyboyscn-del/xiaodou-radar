@@ -1,9 +1,22 @@
 {
-  "lastUpdated": "2026-11-28 17:33 北京时间",
-  "lastSinceId": "2126546016296149353",
+  "lastUpdated": "2026-11-28 17:48 北京时间",
+  "lastSinceId": "2126609543866073578",
   "total": 120,
-  "available": 7,
+  "available": 8,
   "codes": [
+    {
+      "code": "X8MJ66",
+      "postId": "2126602617266872514",
+      "author": "AskForMilk",
+      "postUrl": "https://x.com/AskForMilk/status/2126602617266872514",
+      "postedAt": "2026-11-28 17:02:28 北京时间",
+      "postedAtUtc": "2026-11-28T09:02:28.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-29 18:26",
+      "platform": "X",
+      "source": "good1uck"
+    },
     {
       "code": "PK9SQG",
       "postId": "2126544397701673238",
@@ -1540,19 +1553,6 @@
     },
     {
       "code": "P3W8JF",
-      "postId": "2125266721493889229",
-      "author": "yituihi",
-      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
-      "postedAt": "2026-11-25 00:34:06 北京时间",
-      "postedAtUtc": "2026-11-24T16:34:06.000Z",
-      "replyCount": 7,
-      "status": "maybe_used",
-      "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "G9M4LC",
       "postId": "2125266721493889229",
       "author": "yituihi",
       "postUrl": "https://x.com/yituihi/status/2125266721493889229",
