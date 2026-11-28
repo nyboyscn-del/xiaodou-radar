@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-11-28 16:48 北京时间",
+  "lastUpdated": "2026-11-28 17:03 北京时间",
   "lastSinceId": "2126546016296149353",
   "total": 120,
   "available": 7,
@@ -248,19 +248,6 @@
       "replyCount": 1,
       "status": "maybe_used",
       "expires": "2026-11-28 17:33",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "Y5JPEM",
-      "postId": "2125881335319523359",
-      "author": "Handizoct",
-      "postUrl": "https://x.com/Handizoct/status/2125881335319523359",
-      "postedAt": "2026-11-26 17:16:21 北京时间",
-      "postedAtUtc": "2026-11-26T09:16:21.000Z",
-      "replyCount": 1,
-      "status": "maybe_used",
-      "expires": "2026-11-28 16:58",
       "platform": "X",
       "source": "good1uck"
     },
@@ -1553,6 +1540,19 @@
     },
     {
       "code": "V7H5ZD",
+      "postId": "2125266721493889229",
+      "author": "yituihi",
+      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
+      "postedAt": "2026-11-25 00:34:06 北京时间",
+      "postedAtUtc": "2026-11-24T16:34:06.000Z",
+      "replyCount": 7,
+      "status": "maybe_used",
+      "expires": "",
+      "platform": "X",
+      "source": "good1uck"
+    },
+    {
+      "code": "P3W8JF",
       "postId": "2125266721493889229",
       "author": "yituihi",
       "postUrl": "https://x.com/yituihi/status/2125266721493889229",
