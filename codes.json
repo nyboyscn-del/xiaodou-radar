@@ -1,9 +1,35 @@
 {
-  "lastUpdated": "2026-11-28 22:48 北京时间",
-  "lastSinceId": "2126667238300344335",
+  "lastUpdated": "2026-11-28 23:03 北京时间",
+  "lastSinceId": "2126690572597658023",
   "total": 120,
-  "available": 9,
+  "available": 11,
   "codes": [
+    {
+      "code": "YXK9U6",
+      "postId": "2126690572597658023",
+      "author": "93769deng",
+      "postUrl": "https://x.com/93769deng/status/2126690572597658023",
+      "postedAt": "2026-11-28 22:51:59 北京时间",
+      "postedAtUtc": "2026-11-28T14:51:59.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-30 22:37",
+      "platform": "X",
+      "source": "good1uck"
+    },
+    {
+      "code": "AP7B4J",
+      "postId": "2126688109433889084",
+      "author": "BtcMammon7777",
+      "postUrl": "https://x.com/BtcMammon7777/status/2126688109433889084",
+      "postedAt": "2026-11-28 22:42:11 北京时间",
+      "postedAtUtc": "2026-11-28T14:42:11.000Z",
+      "replyCount": 0,
+      "status": "maybe_available",
+      "expires": "2026-11-30 22:41",
+      "platform": "X",
+      "source": "good1uck"
+    },
     {
       "code": "F9DTYY",
       "postId": "2126662086487105869",
@@ -1527,32 +1553,6 @@
     },
     {
       "code": "Y5W6TN",
-      "postId": "2125266721493889229",
-      "author": "yituihi",
-      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
-      "postedAt": "2026-11-25 00:34:06 北京时间",
-      "postedAtUtc": "2026-11-24T16:34:06.000Z",
-      "replyCount": 7,
-      "status": "maybe_used",
-      "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "C8L3JP",
-      "postId": "2125266721493889229",
-      "author": "yituihi",
-      "postUrl": "https://x.com/yituihi/status/2125266721493889229",
-      "postedAt": "2026-11-25 00:34:06 北京时间",
-      "postedAtUtc": "2026-11-24T16:34:06.000Z",
-      "replyCount": 7,
-      "status": "maybe_used",
-      "expires": "",
-      "platform": "X",
-      "source": "good1uck"
-    },
-    {
-      "code": "N9R4XB",
       "postId": "2125266721493889229",
       "author": "yituihi",
       "postUrl": "https://x.com/yituihi/status/2125266721493889229",
