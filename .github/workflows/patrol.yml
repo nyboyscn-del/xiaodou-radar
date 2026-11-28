@@ -1,3 +1,4 @@
+# 豆码雷达巡检：每 15 分钟聚合一次邀请码并提交 codes.json
 name: xiaodou-radar-patrol
 
 on:
