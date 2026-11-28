@@ -1,8 +1,8 @@
 {
-  "lastUpdated": "2026-11-28 13:18 北京时间",
-  "lastSinceId": "2126544397701673238",
+  "lastUpdated": "2026-11-28 13:33 北京时间",
+  "lastSinceId": "2126546016296149353",
   "total": 120,
-  "available": 8,
+  "available": 7,
   "codes": [
     {
       "code": "PK9SQG",
@@ -11,8 +11,8 @@
       "postUrl": "https://x.com/E20485788/status/2126544397701673238",
       "postedAt": "2026-11-28 13:11:08 北京时间",
       "postedAtUtc": "2026-11-28T05:11:08.000Z",
-      "replyCount": 0,
-      "status": "maybe_available",
+      "replyCount": 3,
+      "status": "maybe_used",
       "expires": "2026-11-30 12:41",
       "platform": "X",
       "source": "good1uck"
