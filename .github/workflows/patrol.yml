@@ -1,0 +1,47 @@
+name: xiaodou-radar-patrol
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: xiaodou-radar-patrol
+  cancel-in-progress: false
+
+jobs:
+  patrol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Write pool key (for reported-codes source)
+        env:
+          POOL_KEY: ${{ secrets.POOL_KEY }}
+        run: |
+          if [ -n "$POOL_KEY" ]; then
+            printf '%s' "$POOL_KEY" > .pool_key
+          else
+            echo "POOL_KEY secret not set; reported source will be skipped"
+          fi
+
+      - name: Run patrol
+        run: python3 patrol.py
+
+      - name: Commit codes.json if changed
+        run: |
+          rm -f .pool_key
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add codes.json
+          if git diff --cached --quiet; then
+            echo "codes.json unchanged, nothing to commit"
+          else
+            git commit -m "patrol: update codes.json (actions)"
+            git push
+          fi
